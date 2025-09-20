@@ -1,5 +1,11 @@
-# ProtoTracer: 3D Rendering and Animation Engine
+# TigerLily Protogens
+This repository contains the code loaded onto all TigerLily Protogen kits. The source code is a modified version of Coela Cant's ProtoTracer and is specifically designed for HUB75 LEDs. 
 
+Due to limitations with the Teensy 4.0, custom faces must be loaded as header files, and therefore each shipment with a custom face has its own source code. Each order will be listed as a branch of this repository. Contact us for more info on where to find your repository.
+
+The converters from ProtoTracer-Helpers will be automatically stored here and kept in their own folder at the root of this repository.
+
+## ProtoTracer
 ProtoTracer is a real-time 3D rendering and animation engine designed for microcontrollers. While it has broad applicability, this is a project made for free and it will be down to you to customize support for other hardware other than the examples provided. Support for other microcontrollers may be possible through custom implementations, but users should be prepared to develop their own adaptations if working with platforms other than the Teensy 4/4.1.
 
 [![Build and Release Firmware HEX Files](https://github.com/coelacant1/ProtoTracer/actions/workflows/build_firmware_and_release.yml/badge.svg)](https://github.com/coelacant1/ProtoTracer/actions/workflows/build_firmware_and_release.yml)
