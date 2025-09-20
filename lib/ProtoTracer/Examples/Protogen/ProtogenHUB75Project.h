@@ -7,70 +7,73 @@
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
 
+// Swap the MainFace class for the desired protogen face
+using MainFace = NukudeFace;
+
 class ProtogenHUB75Project : public ProtogenProject {
 private:
     HUB75DeltaCameraManager cameras;
     HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
-    NukudeFace pM;
+    MainFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
     void LinkControlParameters() override {//Called from parent
-        AddParameter(NukudeFace::Anger, pM.GetMorphWeightReference(NukudeFace::Anger), 15);
-        AddParameter(NukudeFace::Sadness, pM.GetMorphWeightReference(NukudeFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
-        AddParameter(NukudeFace::Surprised, pM.GetMorphWeightReference(NukudeFace::Surprised), 15);
-        AddParameter(NukudeFace::Doubt, pM.GetMorphWeightReference(NukudeFace::Doubt), 15);
-        AddParameter(NukudeFace::Frown, pM.GetMorphWeightReference(NukudeFace::Frown), 15);
-        AddParameter(NukudeFace::LookUp, pM.GetMorphWeightReference(NukudeFace::LookUp), 15);
-        AddParameter(NukudeFace::LookDown, pM.GetMorphWeightReference(NukudeFace::LookDown), 15);
+        AddParameter(MainFace::Anger, pM.GetMorphWeightReference(MainFace::Anger), 15);
+        AddParameter(MainFace::Sadness, pM.GetMorphWeightReference(MainFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(MainFace::Surprised, pM.GetMorphWeightReference(MainFace::Surprised), 15);
+        AddParameter(MainFace::Doubt, pM.GetMorphWeightReference(MainFace::Doubt), 15);
+        AddParameter(MainFace::Frown, pM.GetMorphWeightReference(MainFace::Frown), 15);
+        AddParameter(MainFace::LookUp, pM.GetMorphWeightReference(MainFace::LookUp), 15);
+        AddParameter(MainFace::LookDown, pM.GetMorphWeightReference(MainFace::LookDown), 15);
 
-        AddParameter(NukudeFace::HideBlush, pM.GetMorphWeightReference(NukudeFace::HideBlush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
+        AddParameter(MainFace::HideBlush, pM.GetMorphWeightReference(MainFace::HideBlush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
 
-        AddViseme(Viseme::MouthShape::EE, pM.GetMorphWeightReference(NukudeFace::vrc_v_ee));
-        AddViseme(Viseme::MouthShape::AH, pM.GetMorphWeightReference(NukudeFace::vrc_v_aa));
-        AddViseme(Viseme::MouthShape::UH, pM.GetMorphWeightReference(NukudeFace::vrc_v_dd));
-        AddViseme(Viseme::MouthShape::AR, pM.GetMorphWeightReference(NukudeFace::vrc_v_rr));
-        AddViseme(Viseme::MouthShape::ER, pM.GetMorphWeightReference(NukudeFace::vrc_v_ch));
-        AddViseme(Viseme::MouthShape::OO, pM.GetMorphWeightReference(NukudeFace::vrc_v_oh));
-        AddViseme(Viseme::MouthShape::SS, pM.GetMorphWeightReference(NukudeFace::vrc_v_ss));
+        AddViseme(Viseme::MouthShape::EE, pM.GetMorphWeightReference(MainFace::vrc_v_ee));
+        AddViseme(Viseme::MouthShape::AH, pM.GetMorphWeightReference(MainFace::vrc_v_aa));
+        AddViseme(Viseme::MouthShape::UH, pM.GetMorphWeightReference(MainFace::vrc_v_dd));
+        AddViseme(Viseme::MouthShape::AR, pM.GetMorphWeightReference(MainFace::vrc_v_rr));
+        AddViseme(Viseme::MouthShape::ER, pM.GetMorphWeightReference(MainFace::vrc_v_ch));
+        AddViseme(Viseme::MouthShape::OO, pM.GetMorphWeightReference(MainFace::vrc_v_oh));
+        AddViseme(Viseme::MouthShape::SS, pM.GetMorphWeightReference(MainFace::vrc_v_ss));
 
-        AddBlinkParameter(pM.GetMorphWeightReference(NukudeFace::Blink));
+        AddBlinkParameter(pM.GetMorphWeightReference(MainFace::Blink));
     }
 
     void Default(){}
 
     void Angry(){
-        AddParameterFrame(NukudeFace::Anger, 1.0f);
+        AddParameterFrame(MainFace::Anger, 1.0f);
         AddMaterialFrame(Color::CRED);
     } 
 
     void Sad(){
-        AddParameterFrame(NukudeFace::Sadness, 1.0f);
-        AddParameterFrame(NukudeFace::Frown, 1.0f);
+        AddParameterFrame(MainFace::Sadness, 1.0f);
+        AddParameterFrame(MainFace::Frown, 1.0f);
         AddMaterialFrame(Color::CBLUE);
     }
 
     void Surprised(){
-        AddParameterFrame(NukudeFace::Surprised, 1.0f);
-        AddParameterFrame(NukudeFace::HideBlush, 0.0f);
+        AddParameterFrame(MainFace::Surprised, 1.0f);
+        AddParameterFrame(MainFace::HideBlush, 0.0f);
         AddMaterialFrame(Color::CRAINBOW);
     }
     
     void Doubt(){
-        AddParameterFrame(NukudeFace::Doubt, 1.0f);
+        AddParameterFrame(MainFace::Doubt, 1.0f);
     }
     
     void Frown(){
-        AddParameterFrame(NukudeFace::Frown, 1.0f);
+        AddParameterFrame(MainFace::Frown, 1.0f);
     }
 
     void LookUp(){
-        AddParameterFrame(NukudeFace::LookUp, 1.0f);
+        AddParameterFrame(MainFace::LookUp, 1.0f);
     }
 
     void LookDown(){
-        AddParameterFrame(NukudeFace::LookDown, 1.0f);
+        AddParameterFrame(MainFace::LookDown, 1.0f);
     }
 
     void SpectrumAnalyzerCallback() override {
