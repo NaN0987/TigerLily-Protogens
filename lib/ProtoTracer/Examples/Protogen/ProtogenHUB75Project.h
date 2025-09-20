@@ -2,10 +2,13 @@
 
 #include "../Templates/ProtogenProjectTemplate.h"
 #include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
-#include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Models/FBX/carrot.h"
 
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
+
+// Swap the MainFace class for the desired protogen face
+using MainFace = carrot;
 
 class ProtogenHUB75Project : public ProtogenProject {
 private:

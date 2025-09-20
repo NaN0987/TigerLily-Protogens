@@ -13,7 +13,7 @@ void HUB75Controller::Initialize(){
     //HUB75
     matrix.addLayer(&backgroundLayer);
     matrix.begin();
-    matrix.setRefreshRate(240);
+    matrix.setRefreshRate(100);
 
     backgroundLayer.swapBuffers();//for ESP32 - first is ignored
 

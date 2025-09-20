@@ -5,6 +5,7 @@ lib/ProtoTracer/Assets/Models/FBX/Commissions/*
 .vscode/ipch
 .pio/
 .pio/*
+!.pio/libdeps/teensy40hub75/Adafruit APDS9960 Library/Adafruit_APDS9960.cpp
 .pio
 .pioenvs/
 .piolibdeps/
