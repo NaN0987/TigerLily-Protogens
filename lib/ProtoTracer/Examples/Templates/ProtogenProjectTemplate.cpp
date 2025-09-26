@@ -68,13 +68,13 @@ void ProtogenProject::UpdateFFTVisemes(){
 
 void ProtogenProject::SetMaterialColor(){
     switch(Menu::GetFaceColor()){
-        case 1: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
+        case 1: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
         case 2: materialAnimator.AddMaterialFrame(orangeMaterial, 0.8f); break;
-        case 3: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
+        case 3: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
         case 4: materialAnimator.AddMaterialFrame(greenMaterial, 0.8f); break;
-        case 5: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
-        case 6: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
-        case 7: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
+        case 5: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
+        case 6: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
+        case 7: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
         case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
         case 9: materialAnimator.AddMaterialFrame(flowNoise, 0.8f); break;
         case 10: materialAnimator.AddMaterialFrame(hRainbow, 0.8f); break;
