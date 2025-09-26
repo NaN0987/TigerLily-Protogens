@@ -39,7 +39,7 @@ uint8_t Menu::effect = 0;
 uint8_t Menu::fanSpeed = 0;
 
 //                    111111111111222222222222333333333333444444444444555555555555666666666666777777777777888888888888999999999999111111111111222222222222333333333333444444444444
-String Menu::line1 = "               BRIGHT    SDE BRIGHT     MIC      MIC LEVEL      BOOP        SPEC        SIZE       COLOR       HUE F       HUE B       EFFECT    FAN SPEED  ";
+String Menu::line1 = "               BRIGHT     SDE BRIGHT    MIC       MIC LEVEL     BOOP        SPEC       SIZE        COLOR       HUE F       HUE B       EFFECT     FAN SPEED ";
 String Menu::line2 = " a b c d e f   12^45       12^45       ON off     123456|8     on OFF      ON off      12^45      123456|8    123456|8    123456|8    123456|8    123456|8  ";
 
 EffectChangeTrack<1> Menu::effectChange;
