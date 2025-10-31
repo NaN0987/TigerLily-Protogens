@@ -37,7 +37,7 @@ void MaterialAnimator<materialCount>::AddMaterial(Material::Method method, Mater
 }
 
 template<size_t materialCount>
-void MaterialAnimator<materialCount>::AddMaterialFrame(Material& material, float opacity) {
+void MaterialAnimator<materialCount>::SetMaterialOpacity(Material& material, float opacity) {
     for (uint8_t i = 0; i <= currentMaterials; i++) {
         if (dictionary[i] == &material) {
             eEA.AddParameterFrame(i, opacity);

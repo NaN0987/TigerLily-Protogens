@@ -68,17 +68,17 @@ void ProtogenProject::UpdateFFTVisemes(){
 
 void ProtogenProject::SetMaterialColor(){
     switch(Menu::GetFaceColor()){
-        case 1: materialAnimator.AddMaterialFrame(redMaterial, 0.8f); break;
-        case 2: materialAnimator.AddMaterialFrame(orangeMaterial, 0.8f); break;
-        case 3: materialAnimator.AddMaterialFrame(yellowMaterial, 0.8f); break;
-        case 4: materialAnimator.AddMaterialFrame(greenMaterial, 0.8f); break;
-        case 5: materialAnimator.AddMaterialFrame(blueMaterial, 0.8f); break;
-        case 6: materialAnimator.AddMaterialFrame(purpleMaterial, 0.8f); break;
-        case 7: materialAnimator.AddMaterialFrame(whiteMaterial, 0.8f); break;
-        case 8: materialAnimator.AddMaterialFrame(rainbowSpiral, 0.8f); break;
-        case 9: materialAnimator.AddMaterialFrame(flowNoise, 0.8f); break;
-        case 10: materialAnimator.AddMaterialFrame(hRainbow, 0.8f); break;
-        case 11: materialAnimator.AddMaterialFrame(blackMaterial, 0.8f); break;
+        case 1: materialAnimator.SetMaterialOpacity(redMaterial, 0.8f); break;
+        case 2: materialAnimator.SetMaterialOpacity(orangeMaterial, 0.8f); break;
+        case 3: materialAnimator.SetMaterialOpacity(yellowMaterial, 0.8f); break;
+        case 4: materialAnimator.SetMaterialOpacity(greenMaterial, 0.8f); break;
+        case 5: materialAnimator.SetMaterialOpacity(blueMaterial, 0.8f); break;
+        case 6: materialAnimator.SetMaterialOpacity(purpleMaterial, 0.8f); break;
+        case 7: materialAnimator.SetMaterialOpacity(whiteMaterial, 0.8f); break;
+        case 8: materialAnimator.SetMaterialOpacity(rainbowSpiral, 0.8f); break;
+        case 9: materialAnimator.SetMaterialOpacity(flowNoise, 0.8f); break;
+        case 10: materialAnimator.SetMaterialOpacity(hRainbow, 0.8f); break;
+        case 11: materialAnimator.SetMaterialOpacity(blackMaterial, 0.8f); break;
         default: break;
     }
 }
@@ -342,37 +342,37 @@ void ProtogenProject::AddMaterial(Material::Method method, Material* material, u
 void ProtogenProject::AddMaterialFrame(Color color, float opacity){
     switch(color){
         case CYELLOW:
-            materialAnimator.AddMaterialFrame(yellowMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(yellowMaterial, opacity);
             break;
         case CORANGE:
-            materialAnimator.AddMaterialFrame(orangeMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(orangeMaterial, opacity);
             break;
         case CWHITE:
-            materialAnimator.AddMaterialFrame(whiteMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(whiteMaterial, opacity);
             break;
         case CGREEN:
-            materialAnimator.AddMaterialFrame(greenMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(greenMaterial, opacity);
             break;
         case CPURPLE:
-            materialAnimator.AddMaterialFrame(purpleMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(purpleMaterial, opacity);
             break;
         case CRED:
-            materialAnimator.AddMaterialFrame(redMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(redMaterial, opacity);
             break;
         case CBLUE:
-            materialAnimator.AddMaterialFrame(blueMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(blueMaterial, opacity);
             break;
         case CRAINBOW:
-            materialAnimator.AddMaterialFrame(rainbowSpiral, opacity);
+            materialAnimator.SetMaterialOpacity(rainbowSpiral, opacity);
             break;
         case CRAINBOWNOISE:
-            materialAnimator.AddMaterialFrame(flowNoise, opacity);
+            materialAnimator.SetMaterialOpacity(flowNoise, opacity);
             break;
         case CHORIZONTALRAINBOW:
-            materialAnimator.AddMaterialFrame(hRainbow, opacity);
+            materialAnimator.SetMaterialOpacity(hRainbow, opacity);
             break;
         case CBLACK:
-            materialAnimator.AddMaterialFrame(blackMaterial, opacity);
+            materialAnimator.SetMaterialOpacity(blackMaterial, opacity);
             break;
         default:
             break;
@@ -381,6 +381,7 @@ void ProtogenProject::AddMaterialFrame(Color color, float opacity){
 
 void ProtogenProject::AddMaterialFrame(Material& material, float opacity){
     materialAnimator.AddMaterialFrame(material, opacity);
+    materialAnimator.SetMaterialOpacity(material, opacity);
 }
 
 void ProtogenProject::AddBackgroundMaterial(Material::Method method, Material* material, uint16_t frames, float minOpacity, float maxOpacity){
@@ -390,37 +391,37 @@ void ProtogenProject::AddBackgroundMaterial(Material::Method method, Material* m
 void ProtogenProject::AddBackgroundMaterialFrame(Color color, float opacity){
     switch(color){
         case CYELLOW:
-            backgroundMaterial.AddMaterialFrame(yellowMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(yellowMaterial, opacity);
             break;
         case CORANGE:
-            backgroundMaterial.AddMaterialFrame(orangeMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(orangeMaterial, opacity);
             break;
         case CWHITE:
-            backgroundMaterial.AddMaterialFrame(whiteMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(whiteMaterial, opacity);
             break;
         case CGREEN:
-            backgroundMaterial.AddMaterialFrame(greenMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(greenMaterial, opacity);
             break;
         case CPURPLE:
-            backgroundMaterial.AddMaterialFrame(purpleMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(purpleMaterial, opacity);
             break;
         case CRED:
-            backgroundMaterial.AddMaterialFrame(redMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(redMaterial, opacity);
             break;
         case CBLUE:
-            backgroundMaterial.AddMaterialFrame(blueMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(blueMaterial, opacity);
             break;
         case CRAINBOW:
-            backgroundMaterial.AddMaterialFrame(rainbowSpiral, opacity);
+            backgroundMaterial.SetMaterialOpacity(rainbowSpiral, opacity);
             break;
         case CRAINBOWNOISE:
-            backgroundMaterial.AddMaterialFrame(flowNoise, opacity);
+            backgroundMaterial.SetMaterialOpacity(flowNoise, opacity);
             break;
         case CHORIZONTALRAINBOW:
-            backgroundMaterial.AddMaterialFrame(hRainbow, opacity);
+            backgroundMaterial.SetMaterialOpacity(hRainbow, opacity);
             break;
         case CBLACK:
-            backgroundMaterial.AddMaterialFrame(blackMaterial, opacity);
+            backgroundMaterial.SetMaterialOpacity(blackMaterial, opacity);
             break;
         default:
             break;
@@ -429,6 +430,7 @@ void ProtogenProject::AddBackgroundMaterialFrame(Color color, float opacity){
 
 void ProtogenProject::AddBackgroundMaterialFrame(Material& material, float opacity){
     backgroundMaterial.AddMaterialFrame(material, opacity);
+    backgroundMaterial.SetMaterialOpacity(material, opacity);
 }
 
 void ProtogenProject::SpectrumAnalyzerFace(){
@@ -437,8 +439,8 @@ void ProtogenProject::SpectrumAnalyzerFace(){
     eEA.AddParameterFrame(offsetFaceInd, 1.0f);
     eEA.AddParameterFrame(offsetFaceIndSA, 1.0f);
 
-    materialAnimator.AddMaterialFrame(sA, offsetFaceSA);
-    backgroundMaterial.AddMaterialFrame(sA, offsetFaceSA);
+    materialAnimator.SetMaterialOpacity(sA, offsetFaceSA);
+    backgroundMaterial.SetMaterialOpacity(sA, offsetFaceSA);
 
     SpectrumAnalyzerCallback();
 }
@@ -449,8 +451,8 @@ void ProtogenProject::AudioReactiveGradientFace(){
     eEA.AddParameterFrame(offsetFaceInd, 1.0f);
     eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
-    materialAnimator.AddMaterialFrame(aRG, offsetFaceARG);
-    backgroundMaterial.AddMaterialFrame(aRG, offsetFaceARG);
+    materialAnimator.SetMaterialOpacity(aRG, offsetFaceARG);
+    backgroundMaterial.SetMaterialOpacity(aRG, offsetFaceARG);
 
     AudioReactiveGradientCallback();
 }
@@ -461,8 +463,8 @@ void ProtogenProject::OscilloscopeFace(){
     eEA.AddParameterFrame(offsetFaceInd, 1.0f);
     eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
 
-    materialAnimator.AddMaterialFrame(oSC, offsetFaceOSC);
-    backgroundMaterial.AddMaterialFrame(oSC, offsetFaceOSC);
+    materialAnimator.SetMaterialOpacity(oSC, offsetFaceOSC);
+    backgroundMaterial.SetMaterialOpacity(oSC, offsetFaceOSC);
 
     OscilloscopeCallback();
 }

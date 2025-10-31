@@ -65,7 +65,7 @@ public:
      * @param material Reference to the material.
      * @param opacity The opacity value for the frame.
      */
-    void AddMaterialFrame(Material& material, float opacity);
+    void SetMaterialOpacity(Material& material, float opacity);
 
     /**
      * @brief Retrieves the current opacity of a material.
