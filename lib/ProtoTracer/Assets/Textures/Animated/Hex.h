@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Animation/ImageSequence.h"
+#include "Utils/ImageSequence.h"
 
 class HexSequence : public ImageSequence{
 private:
