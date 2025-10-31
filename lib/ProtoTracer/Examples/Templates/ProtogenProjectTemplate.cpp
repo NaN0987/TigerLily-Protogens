@@ -339,7 +339,7 @@ void ProtogenProject::AddMaterial(Material::Method method, Material* material, u
     materialAnimator.AddMaterial(method, material, frames, minOpacity, maxOpacity);
 }
 
-void ProtogenProject::AddMaterialFrame(Color color, float opacity){
+void ProtogenProject::SetMaterialOpacity(Color color, float opacity){
     switch(color){
         case CYELLOW:
             materialAnimator.SetMaterialOpacity(yellowMaterial, opacity);
@@ -379,8 +379,7 @@ void ProtogenProject::AddMaterialFrame(Color color, float opacity){
     }
 }
 
-void ProtogenProject::AddMaterialFrame(Material& material, float opacity){
-    materialAnimator.AddMaterialFrame(material, opacity);
+void ProtogenProject::SetMaterialOpacity(Material& material, float opacity){
     materialAnimator.SetMaterialOpacity(material, opacity);
 }
 
@@ -388,7 +387,7 @@ void ProtogenProject::AddBackgroundMaterial(Material::Method method, Material* m
     backgroundMaterial.AddMaterial(method, material, frames, minOpacity, maxOpacity);
 }
 
-void ProtogenProject::AddBackgroundMaterialFrame(Color color, float opacity){
+void ProtogenProject::SetBackgroundMaterialOpacity(Color color, float opacity){
     switch(color){
         case CYELLOW:
             backgroundMaterial.SetMaterialOpacity(yellowMaterial, opacity);
@@ -428,8 +427,7 @@ void ProtogenProject::AddBackgroundMaterialFrame(Color color, float opacity){
     }
 }
 
-void ProtogenProject::AddBackgroundMaterialFrame(Material& material, float opacity){
-    backgroundMaterial.AddMaterialFrame(material, opacity);
+void ProtogenProject::SetBackgroundMaterialOpacity(Material& material, float opacity){
     backgroundMaterial.SetMaterialOpacity(material, opacity);
 }
 

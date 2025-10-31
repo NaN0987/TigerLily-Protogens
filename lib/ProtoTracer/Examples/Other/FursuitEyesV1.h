@@ -65,7 +65,7 @@ private:
     void Dot(){
         AddParameterFrame(RoboEyes::Dot, 1.0f);
         AddParameterFrame(RoboEyes::Dot + 10, 1.0f);
-        AddMaterialFrame(Color::CBLUE);
+        SetMaterialOpacity(Color::CBLUE);
         
         EnableBlinking();
     }
@@ -100,7 +100,7 @@ private:
     void Angry(){
         AddParameterFrame(RoboEyes::Angry, 1.0f);
         AddParameterFrame(RoboEyes::Angry + 10, 1.0f);
-        AddMaterialFrame(Color::CRED);
+        SetMaterialOpacity(Color::CRED);
         
         EnableBlinking();
     }

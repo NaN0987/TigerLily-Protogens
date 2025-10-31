@@ -53,7 +53,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Upset(){
@@ -62,7 +62,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Salty(){
@@ -71,7 +71,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(Color::CRED);
+        SetMaterialOpacity(Color::CRED);
     }
 
     void Sleepy(){
@@ -79,7 +79,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Sad(){
@@ -88,7 +88,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(Color::CBLUE);
+        SetMaterialOpacity(Color::CBLUE);
     }
 
     void Loading(){
@@ -96,7 +96,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Dizzy(){
@@ -104,7 +104,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Heart(){
@@ -112,7 +112,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Dead(){
@@ -120,7 +120,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideHeart, 1.0f);
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Pupil(){
@@ -129,7 +129,7 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(horizontalRainbow);
+        SetMaterialOpacity(horizontalRainbow);
     }
 
     void Static(){
@@ -140,8 +140,8 @@ private:
         AddParameterFrame(UnicornZhenja::HideLoading, 1.0f);
         AddParameterFrame(UnicornZhenja::HideSpiral, 1.0f);
 
-        AddMaterialFrame(tvStatic);
-        AddBackgroundMaterialFrame(tvStatic);
+        SetMaterialOpacity(tvStatic);
+        SetBackgroundMaterialOpacity(tvStatic);
     }
 
 public:
@@ -190,15 +190,15 @@ public:
             else if (mode == 8) Dead();
             else if (mode == 9) Pupil();
             else if (mode == 10) {
-                AddMaterialFrame(horizontalRainbow);
+                SetMaterialOpacity(horizontalRainbow);
                 AudioReactiveGradientFace();
             }
             else if (mode == 11){
-                AddMaterialFrame(horizontalRainbow);
+                SetMaterialOpacity(horizontalRainbow);
                 OscilloscopeFace();
             }
             else {
-                AddMaterialFrame(horizontalRainbow);
+                SetMaterialOpacity(horizontalRainbow);
                 SpectrumAnalyzerFace();
             }
         }

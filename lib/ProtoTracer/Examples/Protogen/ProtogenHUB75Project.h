@@ -45,19 +45,19 @@ private:
 
     void Angry(){
         AddParameterFrame(MainFace::Anger, 1.0f);
-        AddMaterialFrame(Color::CRED);
+        SetMaterialOpacity(Color::CRED);
     } 
 
     void Sad(){
         AddParameterFrame(MainFace::Sadness, 1.0f);
         AddParameterFrame(MainFace::Frown, 1.0f);
-        AddMaterialFrame(Color::CBLUE);
+        SetMaterialOpacity(Color::CBLUE);
     }
 
     void Surprised(){
         AddParameterFrame(MainFace::Surprised, 1.0f);
         AddParameterFrame(MainFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW);
+        SetMaterialOpacity(Color::CRAINBOW);
     }
     
     void Doubt(){
@@ -77,15 +77,15 @@ private:
     }
 
     void SpectrumAnalyzerCallback() override {
-        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+        SetMaterialOpacity(Color::CHORIZONTALRAINBOW, 0.8f);
     }
 
     void AudioReactiveGradientCallback() override {
-        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+        SetMaterialOpacity(Color::CHORIZONTALRAINBOW, 0.8f);
     }
 
     void OscilloscopeCallback() override {
-        AddMaterialFrame(Color::CHORIZONTALRAINBOW, 0.8f);
+        SetMaterialOpacity(Color::CHORIZONTALRAINBOW, 0.8f);
     }
 
 public:

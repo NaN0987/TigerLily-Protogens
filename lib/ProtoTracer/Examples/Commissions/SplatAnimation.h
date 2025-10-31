@@ -49,8 +49,8 @@ private:
     }
 
     void Default(){
-        //AddMaterialFrame(Color::CWHITE, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CWHITE, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
         
         ledStripBackground.GetObject()->SetMaterial(GetFaceMaterial());
     }
@@ -58,54 +58,54 @@ private:
     void Angry(){
         AddParameterFrame(SplatFace::AngryEyes, 1.0f);
         AddParameterFrame(SplatFace::AngryMouth, 1.0f);
-        AddMaterialFrame(Color::CRED, 0.8f);
+        SetMaterialOpacity(Color::CRED, 0.8f);
     } 
 
     void Confused(){
         AddParameterFrame(SplatFace::ConfusedEyes, 1.0f);
         AddParameterFrame(SplatFace::ConfusedMouth, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
 
     void Disappointed(){
         AddParameterFrame(SplatFace::DisappointedEyes, 1.0f);
         AddParameterFrame(SplatFace::DisappointedMouth, 1.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
 
     void Excited(){
         AddParameterFrame(SplatFace::ExcitedEyes, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
     
     void FullCircle(){
         AddParameterFrame(SplatFace::FullCircleEyes, 1.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
 
     void Heart(){
         AddParameterFrame(SplatFace::HeartEyes, 1.0f);
         AddParameterFrame(SplatFace::HideBlush, 0.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
 
     void HollowCircle(){
         AddParameterFrame(SplatFace::HollowCircleEyes, 1.0f);
-        //AddMaterialFrame(Color::CRAINBOW, 0.8f);
-        AddMaterialFrame(hRainbow, 0.8f);
+        //SetMaterialOpacity(Color::CRAINBOW, 0.8f);
+        SetMaterialOpacity(hRainbow, 0.8f);
     }
 
     void Sleepy(){
         AddParameterFrame(SplatFace::SleepyEyes, 1.0f);
         AddParameterFrame(SplatFace::SleepyMouth, 1.0f);
-        AddMaterialFrame(Color::CBLUE, 0.8f);
+        SetMaterialOpacity(Color::CBLUE, 0.8f);
     }
 
     void SpectrumAnalyzerCallback() override {

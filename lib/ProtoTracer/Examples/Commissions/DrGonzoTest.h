@@ -46,19 +46,19 @@ private:
 
     void Angry(){
         AddParameterFrame(NukudeFace::Anger, 1.0f);
-        AddMaterialFrame(Color::CRED);
+        SetMaterialOpacity(Color::CRED);
     } 
 
     void Sad(){
         AddParameterFrame(NukudeFace::Sadness, 1.0f);
         AddParameterFrame(NukudeFace::Frown, 1.0f);
-        AddMaterialFrame(Color::CBLUE);
+        SetMaterialOpacity(Color::CBLUE);
     }
 
     void Surprised(){
         AddParameterFrame(NukudeFace::Surprised, 1.0f);
         AddParameterFrame(NukudeFace::HideBlush, 0.0f);
-        AddMaterialFrame(Color::CRAINBOW);
+        SetMaterialOpacity(Color::CRAINBOW);
     }
     
     void Doubt(){

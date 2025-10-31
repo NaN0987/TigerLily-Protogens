@@ -482,14 +482,14 @@ protected:
      * @param color The color enum to switch to.
      * @param opacity The target opacity for that color material.
      */
-    void AddMaterialFrame(Color color, float opacity = 0.8f);
+    void SetMaterialOpacity(Color color, float opacity = 0.8f);
 
     /**
      * @brief Adds a new material frame to the face's MaterialAnimator from a Material reference.
      * @param material A reference to the material to add.
      * @param opacity The target opacity.
      */
-    void AddMaterialFrame(Material& material, float opacity = 1.0f);
+    void SetMaterialOpacity(Material& material, float opacity = 1.0f);
 
     /**
      * @brief Adds a new material to the background's MaterialAnimator with given parameters.
@@ -507,14 +507,14 @@ protected:
      * @param color The color enum to switch to.
      * @param opacity The target opacity.
      */
-    void AddBackgroundMaterialFrame(Color color, float opacity = 0.8f);
+    void SetBackgroundMaterialOpacity(Color color, float opacity = 0.8f);
 
     /**
      * @brief Adds a material frame to the background from a Material reference.
      * @param material The material to add.
      * @param opacity The target opacity.
      */
-    void AddBackgroundMaterialFrame(Material& material, float opacity = 1.0f);
+    void SetBackgroundMaterialOpacity(Material& material, float opacity = 1.0f);
 
     /**
      * @brief Enables the Spectrum Analyzer on the face, updating offsets and calling callbacks.

@@ -106,7 +106,7 @@ private:
         AddParameterFrame(DrGonzoFace::Lewd, 1.0f);
         AddParameterFrame(DrGonzoSD::Lewd + 50, 1.0f);
 
-        sideDisplayMaterial.AddMaterialFrame(lBlue, 1.0f);
+        sideDisplayMaterial.SetMaterialOpacity(lBlue, 1.0f);
     }
 
     void Loading(){
@@ -116,7 +116,7 @@ private:
         DisableBlinking();
         AddParameterFrame(DrGonzoFace::HideBlush, 0.0f);
         AddParameterFrame(DrGonzoFace::Loading, 1.0f);
-        AddMaterialFrame(ProtogenProject::CGREEN);
+        SetMaterialOpacity(ProtogenProject::CGREEN);
 
         float loadingRatio = loadingBar.Update();
         float setRatio = 0.0f;
@@ -193,7 +193,7 @@ private:
         AddParameterFrame(DrGonzoFace::OwO, 1.0f);
         AddParameterFrame(DrGonzoSD::OwO + 50, 1.0f);
 
-        //AddMaterialFrame(Color::CRAINBOW);
+        //SetMaterialOpacity(Color::CRAINBOW);
     }
     
     void Boop(){

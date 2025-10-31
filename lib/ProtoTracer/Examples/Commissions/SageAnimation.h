@@ -82,14 +82,14 @@ private:
     
     void Angry2(){
         AddParameterFrame(SageSchlo::Angry2, 1.0f);
-        AddMaterialFrame(Color::CYELLOW);
+        SetMaterialOpacity(Color::CYELLOW);
 
         AddParameterFrame(SageSchloSideDisplay::Exclamation + 20, 1.0f);
     }
     
     void Angry3(){
         AddParameterFrame(SageSchlo::Angry3, 1.0f);
-        AddMaterialFrame(Color::CRED);
+        SetMaterialOpacity(Color::CRED);
 
         AddParameterFrame(SageSchloSideDisplay::Exclamation + 20, 1.0f);
     }
