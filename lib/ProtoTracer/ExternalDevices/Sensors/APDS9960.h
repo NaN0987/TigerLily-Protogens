@@ -4,6 +4,10 @@
  *
  * This file defines the APDS9960 class, which provides functionality for detecting proximity,
  * brightness, and determining if the sensor is "booped" (close proximity detection).
+ * 
+ * This can be used for other sensors with the 9960 chip, but it may require modification
+ * of the Adafruit source code (see @file Adafruit_APDS9960.cpp, lines 100–104) to allow for 
+ * different chip IDs.
  *
  * @date 22/12/2024
  * @author Coela Can't
