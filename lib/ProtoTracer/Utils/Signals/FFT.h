@@ -22,15 +22,15 @@ private:
     /**
      * @brief Precomputed twiddle coefficients for the FFT.
      */
-    static const constexpr float twiddleCoefficients[fftSize * 2] = [] {
-        float temp[fftSize * 2];
+    // static const constexpr float twiddleCoefficients[fftSize * 2] = [] {
+    //     float temp[fftSize * 2];
 
-        for (int i = 0; i < fftSize * 2; ++i) {
-            temp[i] = FFT<fftSize>::calculateCoefficient(i);
-        }
+    //     for (int i = 0; i < fftSize * 2; ++i) {
+    //         temp[i] = FFT<fftSize>::calculateCoefficient(i);
+    //     }
 
-        return temp;
-    }();
+    //     return temp;
+    // }();
 
     /**
      * @brief Calculates the number of bits required for bit reversal based on FFT size.

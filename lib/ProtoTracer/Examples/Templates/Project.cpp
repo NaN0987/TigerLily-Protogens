@@ -1,4 +1,5 @@
 #include "Project.h"
+#include <stdio.h>
 
 Project::Project(CameraManager* cameras, Controller* controller, uint8_t numObjects) 
     : cameras(cameras), controller(controller), scene(numObjects) {

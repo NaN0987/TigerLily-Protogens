@@ -237,8 +237,8 @@ void HeadsUpDisplay::Initialize() {
     Wire.setSDA(19);
     Wire.setSCL(18);
     #else
-    Wire.setSDA(18);
-    Wire.setSCL(19);
+    //Wire.setSDA(18);
+    //Wire.setSCL(19);
     #endif
 
     Wire.beginTransmission(0x3C);

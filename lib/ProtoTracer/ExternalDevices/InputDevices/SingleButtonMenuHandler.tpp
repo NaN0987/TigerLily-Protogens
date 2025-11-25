@@ -28,33 +28,90 @@ template <uint8_t menuCount>
 bool MenuHandler<menuCount>::previousState;
 
 template <uint8_t menuCount>
+bool MenuHandler<menuCount>::indexMode;
+
+template <uint8_t menuCount>
+uint8_t MenuHandler<menuCount>::numberOfPresses;
+
+template <uint8_t menuCount>
 void MenuHandler<menuCount>::UpdateState() {
     long currentTime = millis();
-    bool pinState = digitalRead(pin);
+    bool isPinNotPressed = digitalRead(pin);
     long timeOn = 0;
 
-    if (pinState && !previousState) {  // Pin not pressed, not triggered -> reset time
-        previousMillisHold = currentTime;
-    } else if (pinState && previousState) {  // Pin not pressed, was triggered -> measure time
-        timeOn = currentTime - previousMillisHold;
+    if (indexMode && currentMenu == 0){
 
-        previousState = false;
-    } else if (!pinState) {  // Pin is pressed,
-        previousState = true;
+        // Case 1: Not pressed, hasn't been unpressed, has been pressed 0 times: reset timer
+        if (isPinNotPressed && !previousState && numberOfPresses == 0) {  // Pin not pressed, not triggered -> reset time
+            previousMillisHold = currentTime;
+
+        // Case 2: Not pressed, hasn't been unpressed, has been pressed one or more times: see how much time has elapsed since last press
+        } else if (isPinNotPressed && !previousState && numberOfPresses > 0) {
+            timeOn = currentTime - previousMillisHold;
+
+            // If held for long enough, set the current value to the number of presses
+            if (timeOn > 200) {
+                previousMillisHold = currentTime;
+
+                currentValue[currentMenu] = numberOfPresses - 1;
+                if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
+                
+                numberOfPresses = 0;
+            }
+
+        // Case 3: Has just been unpressed: either increment numberOfPresses or switch to options menu
+        } else if (isPinNotPressed && previousState) {  // Pin not pressed, was triggered -> measure time
+            timeOn = currentTime - previousMillisHold;
+
+            previousState = false;
+
+            // Switch menu if held
+            if (timeOn > holdingTime) {
+                previousMillisHold = currentTime;
+
+                WriteEEPROM(currentMenu, currentValue[currentMenu]);
+
+                currentMenu += 1;
+                if (currentMenu >= menuCount) currentMenu = 0;
+
+                numberOfPresses = 0;
+            
+            // Otherwise, increment index
+            } else if (timeOn > 50) {
+                previousMillisHold = currentTime;
+                numberOfPresses += 1;
+            }
+
+        // Case 4: Pin is currently held down
+        } else if (!isPinNotPressed) {  // Pin is pressed,
+            previousState = true;
+        }
     }
 
-    if (timeOn > holdingTime && pinState) {
-        previousMillisHold = currentTime;
+    else {
+        if (isPinNotPressed && !previousState) {  // Pin not pressed, not triggered -> reset time
+            previousMillisHold = currentTime;
+        } else if (isPinNotPressed && previousState) {  // Pin not pressed, was triggered -> measure time
+            timeOn = currentTime - previousMillisHold;
 
-        WriteEEPROM(currentMenu, currentValue[currentMenu]);
+            previousState = false;
+        } else if (!isPinNotPressed) {  // Pin is pressed,
+            previousState = true;
+        }
 
-        currentMenu += 1;
-        if (currentMenu >= menuCount) currentMenu = 0;
-    } else if (timeOn > 50 && pinState) {
-        previousMillisHold = currentTime;
+        if (timeOn > holdingTime && isPinNotPressed) {
+            previousMillisHold = currentTime;
 
-        currentValue[currentMenu] += 1;
-        if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
+            WriteEEPROM(currentMenu, currentValue[currentMenu]);
+
+            currentMenu += 1;
+            if (currentMenu >= menuCount) currentMenu = 0;
+        } else if (timeOn > 50 && isPinNotPressed) {
+            previousMillisHold = currentTime;
+
+            currentValue[currentMenu] += 1;
+            if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
+        }
     }
 }
 
@@ -78,6 +135,9 @@ bool MenuHandler<menuCount>::Initialize(uint8_t pin, uint16_t holdingTime) {
     MenuHandler::holdingState = true;
 
     MenuHandler::previousState = false;
+
+    MenuHandler::indexMode = true;
+    MenuHandler::numberOfPresses = 0;
 
     pinMode(pin, INPUT_PULLUP);
 

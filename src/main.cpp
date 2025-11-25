@@ -17,7 +17,47 @@
  * @author Coela Can't
  */
 
+ // For simulation mode, include non-arduino headers BEFORE macros are defined
+#if defined(SIMULATION_MODE)
+
+    // #include <thread>
+    // #include <chrono>
+    // #include <atomic>
+    // #include <functional>
+    // #include <IntervalTimer.h>
+    //#include "sim.h"
+
+#endif
+
 #include "Examples/UserConfiguration.h"
+#include <stdio.h>
+
+#include <Arduino.h> // Include for Arduino compatibility.
+using namespace fakeit;
+
+class simStuff {
+public:
+    simStuff() {
+        When(Method(ArduinoFake(), micros)).AlwaysReturn((long)(123456));
+        Mock<Serial_> serialFake;
+
+        When(Method(serialFake, begin)).AlwaysReturn();
+        // When(Method(ArduinoFake(Serial), begin)).AlwaysReturn();
+
+        // When(Method(ArduinoFake(Serial), print)).AlwaysDo([](const char* msg) {
+        //     std::cout << msg;
+        //     return strlen(msg);
+        // });
+
+        // When(Method(ArduinoFake(Serial), println)).AlwaysDo([](const char* msg) {
+        //     std::cout << msg << "/n";
+        //     return strlen(msg) + 1;
+        // });
+
+    }
+};
+
+simStuff simInstance;
 
 #if defined(PROJECT_PROTOGEN_HUB75)
     #include "Examples/Protogen/ProtogenHUB75Project.h"
@@ -47,8 +87,10 @@
  * If PROJECT_VERIFY_HARDWARE is defined, runs continuous hardware testing.
  */
 void setup() {
+
+    std::cout << "Running Setup" << std::endl;
     Serial.begin(115200); ///< Initializes the serial port for debugging.
-    Serial.println("\nStarting...");
+    Serial.println("/nStarting...");
 
     #ifndef PROJECT_VERIFY_HARDWARE
     project.Initialize(); ///< Initializes the selected project.
@@ -69,6 +111,7 @@ void setup() {
  * If PROJECT_VERIFY_HARDWARE is defined, this function is disabled.
  */
 void loop() {
+    std::cout << "Running loop" << std::endl;
     #ifndef PROJECT_VERIFY_HARDWARE
     float ratio = (float)(millis() % 5000) / 5000.0f; ///< Calculates animation ratio based on time.
 
@@ -78,3 +121,21 @@ void loop() {
     project.PrintStats(); ///< Outputs debugging and performance statistics.
     #endif
 }
+
+#ifdef SIMULATION_MODE   
+/**
+ * @brief Provides an entry point for the code if not being ran on an Arduino.
+ *
+ * If SIMULATION_MODE is not defined, this function is disabled.
+ */
+int main() {
+    std::cout << "Running Main" << std::endl;
+    
+    setup();
+
+    while (true) {
+        loop();
+    }
+    return 0;
+}
+#endif

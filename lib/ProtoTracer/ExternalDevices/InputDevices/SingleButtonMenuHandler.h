@@ -39,6 +39,10 @@ private:
     static bool holdingState; ///< Indicates whether the button is in a holding state.
     static bool previousState; ///< Tracks the previous state of the button.
 
+    static uint8_t numberOfPresses; ///< Tracks the number of button presses in index mode.
+    static bool indexMode; ///< Whether to enable index mode for switching faces.
+
+
     /**
      * @brief Updates the button state and menu navigation.
      */

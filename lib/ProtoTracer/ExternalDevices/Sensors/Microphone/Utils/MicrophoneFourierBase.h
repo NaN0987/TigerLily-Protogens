@@ -13,10 +13,10 @@
 #pragma once
 
 #include <Arduino.h> // Include for Arduino compatibility.
-#include "../../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
-#include "../../../../Utils/Filter/FFTFilter.h" // Include for FFT-based filtering.
-#include "../../../../Utils/Time/TimeStep.h" // Include for time management.
-#include "../../../../Utils/Signals/FFT.h" // Include for FFT processing.
+// #include "../../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
+// #include "../../../../Utils/Filter/FFTFilter.h" // Include for FFT-based filtering.
+// #include "../../../../Utils/Time/TimeStep.h" // Include for time management.
+// #include "../../../../Utils/Signals/FFT.h" // Include for FFT processing.
 
 /**
  * @class MicrophoneFourierBase
@@ -28,26 +28,7 @@
  */
 class MicrophoneFourierBase {
 protected:
-    static const uint16_t FFTSize = 256; ///< Size of the FFT (number of samples).
-    static const uint16_t OutputBins = 128; ///< Number of output bins from FFT processing.
-    static uint16_t sampleRate; ///< Sampling rate in Hz.
-    static uint8_t pin; ///< Pin number for microphone input.
-    static float minDB; ///< Minimum decibel value for normalization.
-    static float maxDB; ///< Maximum decibel value for normalization.
-    static float threshold; ///< Threshold value for processing.
-    static float currentValue; ///< Current magnitude of the microphone signal.
-    static bool isInitialized; ///< Flag indicating if the system is initialized.
-
-    static DerivativeFilter peakFilterRate; ///< Filter for peak rate detection.
-
-    static float inputSamp[FFTSize * 2]; ///< Raw input samples for FFT.
-    static float inputStorage[FFTSize]; ///< Storage for processed input samples.
-    static float outputMagn[FFTSize]; ///< Magnitude output from FFT.
-    static float outputData[OutputBins]; ///< Processed FFT data for output bins.
-    static float outputDataFilt[OutputBins]; ///< Filtered FFT data for output bins.
-    static FFTFilter fftFilters[OutputBins]; ///< Array of FFT filters for post-processing.
-
-    static FFT<FFTSize> fft; ///< FFT processor instance.
+   
 
 public:
     /**

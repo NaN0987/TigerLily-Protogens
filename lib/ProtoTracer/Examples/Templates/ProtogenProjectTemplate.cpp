@@ -1,4 +1,5 @@
 #include "ProtogenProjectTemplate.h"
+#include <stdio.h>
 
 void ProtogenProject::LinkParameters(){
     eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
@@ -322,7 +323,7 @@ void ProtogenProject::AddParameter(uint8_t index, float* parameter, uint16_t tra
 void ProtogenProject::AddViseme(Viseme::MouthShape visemeName, float* parameter){
     eEA.AddParameter(parameter, visemeName + 100, 2, 0.0f, 1.0f);
 
-    eEA.SetInterpolationMethod(visemeName + 100, IEasyEaseAnimator::Linear);
+    eEA.SetInterpolationMethod(visemeName + 100, IEasyEaseAnimator::Cosine);
 }
 
 void ProtogenProject::AddBlinkParameter(float* blinkParameter){
@@ -387,6 +388,7 @@ void ProtogenProject::AddBackgroundMaterial(Material::Method method, Material* m
     backgroundMaterial.AddMaterial(method, material, frames, minOpacity, maxOpacity);
 }
 
+// I think the face is just the blackness around the face and the color of the background shows through (maybe)
 void ProtogenProject::SetBackgroundMaterialOpacity(Color color, float opacity){
     switch(color){
         case CYELLOW:
@@ -446,7 +448,7 @@ void ProtogenProject::SpectrumAnalyzerFace(){
 void ProtogenProject::AudioReactiveGradientFace(){
     aRG.Update(MicrophoneFourier::GetFourierFiltered());
 
-    eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+    eEA.AddParameterFrame(offsetFaceInd, 1.0f);// Hides face
     eEA.AddParameterFrame(offsetFaceIndARG, 1.0f);
 
     materialAnimator.SetMaterialOpacity(aRG, offsetFaceARG);
@@ -458,7 +460,7 @@ void ProtogenProject::AudioReactiveGradientFace(){
 void ProtogenProject::OscilloscopeFace(){
     oSC.Update(MicrophoneFourier::GetSamples());
 
-    eEA.AddParameterFrame(offsetFaceInd, 1.0f);
+    eEA.AddParameterFrame(offsetFaceInd, 1.0f);// Hides face
     eEA.AddParameterFrame(offsetFaceIndOSC, 1.0f);
 
     materialAnimator.SetMaterialOpacity(oSC, offsetFaceOSC);
@@ -515,6 +517,7 @@ Material* ProtogenProject::GetBackgroundMaterial(){
 }
 
 ProtogenProject::ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects + 1) {
+    std::cout << "Running Setup2" << std::endl;
     this->camMin = camMin;
     this->camMax = camMax;
     this->microphonePin = microphonePin;

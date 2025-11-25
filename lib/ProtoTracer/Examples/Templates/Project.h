@@ -36,7 +36,7 @@ protected:
 
     RunningAverageFilter<50> avgFPS = RunningAverageFilter<50>(0.05f); ///< Running average filter for frame rate calculation.
 
-    long previousAnimationTime = 0; ///< Time of the previous animation frame in microseconds.
+    unsigned long previousAnimationTime = 0; ///< Time of the previous animation frame in microseconds.
     long previousRenderTime = 0; ///< Time of the previous render frame in microseconds.
     long previousDisplayTime = 0; ///< Time of the previous display frame in microseconds.
     float fade = 0.0f; ///< Fade parameter for animations.

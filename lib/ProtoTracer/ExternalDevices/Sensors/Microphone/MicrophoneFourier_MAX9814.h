@@ -15,9 +15,9 @@
 #pragma once
 
 #include <Arduino.h> // Include for Arduino compatibility.
-#include "../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
-#include "../../../Utils/Filter/FFTFilter.h" // Include for FFT filtering.
-#include "../../../Utils/Time/TimeStep.h" // Include for time management.
+// #include "../../../Utils/Filter/DerivativeFilter.h" // Include for derivative filtering.
+// #include "../../../Utils/Filter/FFTFilter.h" // Include for FFT filtering.
+// #include "../../../Utils/Time/TimeStep.h" // Include for time management.
 #include "Utils/MicrophoneFourierBase.h" // Include the base class for microphone FFT processing.
 
 /**
@@ -29,28 +29,6 @@
  * dynamic updating and resetting of the microphone system.
  */
 class MicrophoneFourier : public MicrophoneFourierBase {
-private:
-    static IntervalTimer sampleTimer; ///< Timer for managing sampling intervals.
-    static TimeStep timeStep; ///< Time step utility for controlling updates.
-
-    static uint16_t samples; ///< Number of samples collected in the current cycle.
-    static uint16_t samplesStorage; ///< Total number of samples stored.
-    static float refreshRate; ///< Refresh rate for processing in Hz.
-    static bool samplesReady; ///< Flag indicating if samples are ready for processing.
-
-    static uint16_t frequencyBins[OutputBins]; ///< Array for storing frequency bin data.
-
-    /**
-     * @brief Callback function for the sampling timer.
-     *
-     * This function is triggered at each sampling interval to collect microphone data.
-     */
-    static void SamplerCallback();
-
-    /**
-     * @brief Starts the sampling process using the IntervalTimer.
-     */
-    static void StartSampler();
 
 public:
     /**
@@ -73,4 +51,7 @@ public:
      * @brief Updates the microphone system, processing new samples and performing FFT.
      */
     static void Update();
+
+    void StartSampler();
+    void SamplerCallback();
 };

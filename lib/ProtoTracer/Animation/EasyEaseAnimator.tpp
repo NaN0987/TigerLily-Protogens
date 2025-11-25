@@ -43,6 +43,13 @@ float EasyEaseAnimator<maxParameters>::GetTarget(uint16_t dictionaryValue){
     return 0.0f;
 }
 
+/// @brief 
+/// @tparam maxParameters 
+/// @param parameter The pointer that holds the changing value and can be used to change the opacity (for example) so that it eases from basis to goal.
+/// @param dictionaryValue the key for this specific animatable value.
+/// @param frames number of frames for transition.
+/// @param basis Initial value.
+/// @param goal Final value that it wants to reach after <frames> frames.
 template<size_t maxParameters>
 void EasyEaseAnimator<maxParameters>::AddParameter(float* parameter, uint16_t dictionaryValue, uint16_t frames, float basis, float goal){
     if(currentParameters < maxParameters){
