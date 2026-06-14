@@ -60,3 +60,21 @@
 #if DOXYGEN
 #define MORSEBUTTON
 #endif
+
+#if defined(PROJECT_PROTOGEN_HUB75)
+    
+    /**
+     * @namespace Pins
+     * @brief Contains the pin numbers for various hardware components.
+     */
+    namespace Pins {
+        constexpr int MIC = 22; // Analog input pin for microphone
+        constexpr int FAN = 15; // PWM output pin for controlling fan speed
+        constexpr int BUTTON = 23; // Button input pin for changing face
+
+        /* Pins for I2C communication */
+        constexpr int SCL = 19;
+        constexpr int SDA = 18;
+    }
+
+#endif
