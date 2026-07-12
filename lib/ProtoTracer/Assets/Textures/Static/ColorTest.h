@@ -2,7 +2,7 @@
 
 #include "../../../Scene/Materials/Static/Image.h"
 
-class ColorTest : public Image{
+class ColorTest : public Image {
 private:
 	static const uint8_t rgbMemory[];
 	static const uint8_t rgbColors[];

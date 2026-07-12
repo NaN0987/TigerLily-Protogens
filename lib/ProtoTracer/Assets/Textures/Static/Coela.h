@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Materials/Image.h"
+#include "../../../Scene/Materials/Static/Image.h"
 
-class Coela : public Image{
+class Coela : public Image {
 private:
 	static const uint8_t rgbMemory[];
 	static const uint8_t rgbColors[];
