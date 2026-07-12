@@ -3,6 +3,7 @@
 #include "../Templates/ProtogenProjectTemplate.h"
 #include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
 #include "../../Assets/Models/FBX/NukudeFlat.h"
+#include "../../Assets/Textures/Animated/Garfield.h"
 
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
@@ -16,6 +17,10 @@ private:
     HUB75Controller controller = HUB75Controller(&cameras, 50, 50);
     MainFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
+
+    GarfieldSequence gif = GarfieldSequence(Vector2D(100.0f, 100.0f), Vector2D(100, 55), 10.0f);
+    const uint8_t gifIndex = 69;
+    float gifOpacity = 0.0f;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -39,6 +44,8 @@ private:
         AddViseme(Viseme::MouthShape::SS, pM.GetMorphWeightReference(MainFace::vrc_v_ss));
 
         AddBlinkParameter(pM.GetMorphWeightReference(MainFace::Blink));
+
+        AddParameter(gifIndex, &gifOpacity, 20, IEasyEaseAnimator::InterpolationMethod::Linear);
     }
 
     void Default(){}
@@ -88,10 +95,32 @@ private:
         SetMaterialOpacity(Color::CHORIZONTALRAINBOW, 0.8f);
     }
 
+    void GifMode(){
+        // Weird thing I noticed:
+        // - Setting the gif to half opacity (without using HideFace()) sets the face to half opacity, 
+        //   and setting the gif to full opacity automatically hides the face somehow.
+        // - The only way to make the face disappear is to call SetMaterialOpacity and 
+        //   SetBackgroundMaterialOpacity and set your material to 100% opacity. Otherwise,
+        //   the face remains squished, yet visible, at the bottom of the matrices.
+
+        HideFace();
+
+        // This fluidly adjusts gifOpacity
+        AddParameterFrame(gifIndex, 1.0f);
+
+        SetMaterialOpacity(gif, gifOpacity);
+        SetBackgroundMaterialOpacity(gif, gifOpacity);
+
+        gif.Update();
+    }
+
 public:
-    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 9){
+    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 10){
         scene.AddObject(pM.GetObject());
         scene.AddObject(deltaDisplayBackground.GetObject());
+
+        AddMaterial(Material::Replace, &gif, 20, 0.0f, 1.0f);
+        AddBackgroundMaterial(Material::Add, &gif, 20, 0.0f, 1.0f);
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
@@ -124,6 +153,9 @@ public:
 
         pM.Update();
 
+        if (gifOpacity < 0.01f)
+            gif.Reset();
+
         AlignObjectFace(pM.GetObject(), -7.5f);
 
         pM.GetObject()->GetTransform()->SetPosition(GetWiggleOffset());
@@ -145,7 +177,8 @@ public:
             case 5: Sad();      break;
             case 6: AudioReactiveGradientFace();    break;
             case 7: OscilloscopeFace();             break;
-            default: SpectrumAnalyzerFace();        break;
+            case 8: SpectrumAnalyzerFace();        break;
+            default: GifMode(); break;
         }
     }
 
@@ -160,6 +193,7 @@ public:
             case 2: Surprised();    break; // [B]lush
             case 4: Doubt();        break; // [D]oubt
             case 6: Frown();        break; // [F]rown
+            case 7: GifMode();      break; // [G]IF
             case 19: Sad();         break; // [S]ad
             case 21: LookUp();      break; // Look [U]p
             case 22: LookDown();    break; // Look [V] Down
