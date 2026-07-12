@@ -42,7 +42,7 @@ RGBColor Image::GetRGB(const Vector3D& position, const Vector3D& normal, const V
 
     unsigned int pos = data[x + y * xPixels] * 3;
 
-    if (pos > colors - (unsigned int)1) return RGBColor();
+    if (pos > (colors * 3) - (unsigned int)1) return RGBColor();
 
     return RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).HueShift(hueAngle);
 }
