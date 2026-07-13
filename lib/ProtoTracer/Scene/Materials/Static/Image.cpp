@@ -35,14 +35,14 @@ void Image::SetHueAngle(float hueAngle) {
 RGBColor Image::GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) {
     Vector2D rPos = angle != 0.0f ? Vector2D(position.X, position.Y).Rotate(angle, offset) - offset : Vector2D(position.X, position.Y) - offset;
 
-    unsigned int x = (unsigned int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, float(xPixels), 0.0f);
-    unsigned int y = (unsigned int)Mathematics::Map(rPos.Y, size.Y / -2.0f, size.Y / 2.0f, float(yPixels), 0.0f);
+    int x = (int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, float(xPixels), 0.0f);
+    int y = (int)Mathematics::Map(rPos.Y, size.Y / -2.0f, size.Y / 2.0f, float(yPixels), 0.0f);
 
-    if (x <= 1 || x >= xPixels || y <= 1 || y >= yPixels) return RGBColor();
+    if (x < 0 || x >= xPixels || y < 0 || y >= yPixels) return RGBColor();
 
-    unsigned int pos = data[x + y * xPixels] * 3;
+    unsigned int rgbPos = data[x + y * xPixels] * 3;
 
-    if (pos > (colors * 3) - (unsigned int)1) return RGBColor();
+    if (rgbPos > (colors * 3) - (unsigned int)1) return RGBColor();
 
-    return RGBColor(rgbColors[pos], rgbColors[pos + 1], rgbColors[pos + 2]).HueShift(hueAngle);
+    return RGBColor(rgbColors[rgbPos], rgbColors[rgbPos + 1], rgbColors[rgbPos + 2]).HueShift(hueAngle);
 }
