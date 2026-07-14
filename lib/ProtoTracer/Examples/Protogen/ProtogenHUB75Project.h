@@ -3,7 +3,8 @@
 #include "../Templates/ProtogenProjectTemplate.h"
 #include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
 #include "../../Assets/Models/FBX/NukudeFlat.h"
-#include "../../Assets/Textures/Animated/Garfield.h"
+#include "../../Assets/Textures/Animated/Rainbow2.h"
+#include "../../Scene/Materials/Static/ScreencastImage.h"
 
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
 #include "../../Controller/HUB75Controller.h"
@@ -18,9 +19,13 @@ private:
     MainFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
 
-    GarfieldSequence gif = GarfieldSequence(Vector2D(100.0f, 100.0f), Vector2D(100, 55), 10.0f);
+    Rainbow2Sequence gif = Rainbow2Sequence(Vector2D(200.0f, 100.0f), Vector2D(100, 55), 10.0f);
     const uint8_t gifIndex = 69;
     float gifOpacity = 0.0f;
+    
+    ScreencastImage image = ScreencastImage(Vector2D(194.0f, 97.0f), Vector2D(94.5f, 47.0f));
+    const uint8_t imgIndex = 70;
+    float imgOpacity = 0.0f;
     
 	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
 
@@ -46,6 +51,7 @@ private:
         AddBlinkParameter(pM.GetMorphWeightReference(MainFace::Blink));
 
         AddParameter(gifIndex, &gifOpacity, 20, IEasyEaseAnimator::InterpolationMethod::Linear);
+        AddParameter(imgIndex, &imgOpacity, 20, IEasyEaseAnimator::InterpolationMethod::Linear);
     }
 
     void Default(){}
@@ -114,13 +120,25 @@ private:
         gif.Update();
     }
 
+    void Screencast(){
+        HideFace();
+
+        AddParameterFrame(imgIndex, 1.0f);
+
+        SetMaterialOpacity(image, imgOpacity);
+        SetBackgroundMaterialOpacity(image, imgOpacity);
+    }
+
 public:
-    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 10){
+    ProtogenHUB75Project() : ProtogenProject(&cameras, &controller, 2, Vector2D(), Vector2D(192.0f, 94.0f), 22, 23, 11){
         scene.AddObject(pM.GetObject());
         scene.AddObject(deltaDisplayBackground.GetObject());
 
         AddMaterial(Material::Replace, &gif, 20, 0.0f, 1.0f);
         AddBackgroundMaterial(Material::Add, &gif, 20, 0.0f, 1.0f);
+
+        AddMaterial(Material::Replace, &image, 20, 0.0f, 1.0f);
+        AddBackgroundMaterial(Material::Add, &image, 20, 0.0f, 1.0f);
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
@@ -155,6 +173,8 @@ public:
 
         if (gifOpacity < 0.01f)
             gif.Reset();
+        
+        image.Update(true);
 
         AlignObjectFace(pM.GetObject(), -7.5f);
 
@@ -177,8 +197,9 @@ public:
             case 5: Sad();      break;
             case 6: AudioReactiveGradientFace();    break;
             case 7: OscilloscopeFace();             break;
-            case 8: SpectrumAnalyzerFace();        break;
-            default: GifMode(); break;
+            case 8: SpectrumAnalyzerFace();         break;
+            case 9: GifMode();  break;
+            default: Screencast();                   break;
         }
     }
 
