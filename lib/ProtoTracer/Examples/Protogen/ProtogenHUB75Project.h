@@ -173,8 +173,11 @@ public:
 
         if (gifOpacity < 0.01f)
             gif.Reset();
-        
-        image.Update(true);
+
+        if (imgOpacity > 0.0f)
+            image.Update(true);
+        else
+            image.Update(false);
 
         AlignObjectFace(pM.GetObject(), -7.5f);
 
