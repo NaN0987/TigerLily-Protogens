@@ -3,7 +3,7 @@
 #include "../Templates/ProtogenProjectTemplate.h"
 #include "../../Assets/Models/OBJ/DeltaDisplayBackground.h"
 #include "../../Assets/Models/FBX/NukudeFlat.h"
-#include "../../Assets/Textures/Animated/Rainbow2.h"
+#include "../../Assets/Textures/Animated/Garfield.h"
 #include "../../Scene/Materials/Static/ScreencastImage.h"
 
 #include "../../Camera/CameraManager/Implementations/HUB75DeltaCameras.h"
@@ -19,15 +19,15 @@ private:
     MainFace pM;
     DeltaDisplayBackground deltaDisplayBackground;
 
-    Rainbow2Sequence gif = Rainbow2Sequence(Vector2D(200.0f, 100.0f), Vector2D(100, 55), 10.0f);
+    GarfieldSequence gif = GarfieldSequence(Vector2D(100.0f, 100.0f), Vector2D(100, 50), 10.0f);
     const uint8_t gifIndex = 69;
     float gifOpacity = 0.0f;
     
-    ScreencastImage image = ScreencastImage(Vector2D(194.0f, 97.0f), Vector2D(94.5f, 47.0f));
+    ScreencastImage scImage = ScreencastImage(Vector2D(194.0f, 97.0f), Vector2D(94.5f, 47.0f));
     const uint8_t imgIndex = 70;
     float imgOpacity = 0.0f;
     
-	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
+	const __FlashStringHelper* faceArray[11] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3"), F("GIF"), F("SCRNCST")};
 
     void LinkControlParameters() override {//Called from parent
         AddParameter(MainFace::Anger, pM.GetMorphWeightReference(MainFace::Anger), 15);
@@ -125,8 +125,8 @@ private:
 
         AddParameterFrame(imgIndex, 1.0f);
 
-        SetMaterialOpacity(image, imgOpacity);
-        SetBackgroundMaterialOpacity(image, imgOpacity);
+        SetMaterialOpacity(scImage, imgOpacity);
+        SetBackgroundMaterialOpacity(scImage, imgOpacity);
     }
 
 public:
@@ -137,8 +137,8 @@ public:
         AddMaterial(Material::Replace, &gif, 20, 0.0f, 1.0f);
         AddBackgroundMaterial(Material::Add, &gif, 20, 0.0f, 1.0f);
 
-        AddMaterial(Material::Replace, &image, 20, 0.0f, 1.0f);
-        AddBackgroundMaterial(Material::Add, &image, 20, 0.0f, 1.0f);
+        AddMaterial(Material::Replace, &scImage, 20, 0.0f, 1.0f);
+        AddBackgroundMaterial(Material::Add, &scImage, 20, 0.0f, 1.0f);
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
         deltaDisplayBackground.GetObject()->SetMaterial(GetFaceMaterial());
@@ -175,9 +175,9 @@ public:
             gif.Reset();
 
         if (imgOpacity > 0.0f)
-            image.Update(true);
+            scImage.Update(true);
         else
-            image.Update(false);
+            scImage.Update(false);
 
         AlignObjectFace(pM.GetObject(), -7.5f);
 
