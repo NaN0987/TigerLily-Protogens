@@ -38,7 +38,12 @@ RGBColor Image::GetRGB(const Vector3D& position, const Vector3D& normal, const V
     int x = (int)Mathematics::Map(rPos.X, size.X / -2.0f, size.X / 2.0f, float(xPixels), 0.0f);
     int y = (int)Mathematics::Map(rPos.Y, size.Y / -2.0f, size.Y / 2.0f, float(yPixels), 0.0f);
 
-    if (x < 0 || x >= xPixels || y < 0 || y >= yPixels) return RGBColor();
+    if (x < 0 || y < 0)
+        return RGBColor();
+
+    if (static_cast<unsigned>(x) >= xPixels ||
+        static_cast<unsigned>(y) >= yPixels)
+        return RGBColor();
 
     unsigned int rgbPos = data[x + y * xPixels] * 3;
 
