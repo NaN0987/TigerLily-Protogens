@@ -28,29 +28,49 @@ template <uint8_t menuCount>
 bool MenuHandler<menuCount>::previousState;
 
 template <uint8_t menuCount>
+bool MenuHandler<menuCount>::actionLock;
+
+template <uint8_t menuCount>
 void MenuHandler<menuCount>::UpdateState() {
     long currentTime = millis();
-    bool pinState = digitalRead(pin);
+    bool buttonPressed = !digitalRead(pin);
     long timeOn = 0;
 
-    if (pinState && !previousState) {  // Pin not pressed, not triggered -> reset time
+    if (!buttonPressed && !previousState) { // Button not pressed, was not previously pressed -> reset time
         previousMillisHold = currentTime;
-    } else if (pinState && previousState) {  // Pin not pressed, was triggered -> measure time
+        actionLock = false;
+    
+    } else if (previousState) { // Button was pressed -> measure time
         timeOn = currentTime - previousMillisHold;
 
-        previousState = false;
-    } else if (!pinState) {  // Pin is pressed,
+        if (!buttonPressed) { // Button no longer pressed -> update previous state
+            previousState = false;
+        }
+    
+    } else if (buttonPressed) { // Button is pressed, was not previously pressed -> update previous state
         previousState = true;
     }
 
-    if (timeOn > holdingTime && pinState) {
+    // Check time-ons
+    if (timeOn > 1800 && !actionLock) { // Very long press -> exit settings/back to default face
+        actionLock = true;
+
+        if (currentMenu != 0) {
+            WriteEEPROM(currentMenu, currentValue[currentMenu]);
+            currentMenu = 0;
+        } else {
+            currentValue[currentMenu] = 0;
+        }
+    
+    } else if (timeOn > holdingTime && !buttonPressed && !actionLock) { // Long press -> enter settings/next setting
         previousMillisHold = currentTime;
 
         WriteEEPROM(currentMenu, currentValue[currentMenu]);
 
         currentMenu += 1;
         if (currentMenu >= menuCount) currentMenu = 0;
-    } else if (timeOn > 50 && pinState) {
+    
+    } else if (timeOn > 50 && !buttonPressed && !actionLock) { // Short press -> next face/change setting
         previousMillisHold = currentTime;
 
         currentValue[currentMenu] += 1;
@@ -78,6 +98,8 @@ bool MenuHandler<menuCount>::Initialize(uint8_t pin, uint16_t holdingTime) {
     MenuHandler::holdingState = true;
 
     MenuHandler::previousState = false;
+
+    MenuHandler::actionLock = false;
 
     pinMode(pin, INPUT_PULLUP);
 
