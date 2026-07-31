@@ -560,6 +560,7 @@ void ProtogenProject::Initialize() {
     boop.Initialize(5);
 
     hud.Initialize();
+    hud.SetMainCam((cameras->GetCameras())[0]);
 
     fanController.Initialize();
 

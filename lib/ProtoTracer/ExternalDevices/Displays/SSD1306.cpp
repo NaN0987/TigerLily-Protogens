@@ -227,6 +227,10 @@ void HeadsUpDisplay::SetFaceMax(Vector2D faceMax) {
     this->faceMax = faceMax;
 }
 
+void HeadsUpDisplay::SetMainCam(CameraBase* mainCam) {
+    this->mainPixelGroup = mainCam->GetPixelGroup();
+}
+
 void HeadsUpDisplay::Initialize() {
     ResetDisplayBuffer();
 
@@ -318,12 +322,14 @@ void HeadsUpDisplay::ApplyEffect(IPixelGroup* pixelGroup) {
     
     unsigned int pixelCount = pixelGroup->GetPixelCount();
     
-    for (unsigned int i = 0; i < pixelCount; i++){
-        Vector2D pixelLocation = pixelGroup->GetCoordinate(i);
-        RGBColor color = *pixelGroup->GetColor(i);
-
-        if(color.R > 0 || color.G > 0 || color.G > 0){
-            EnableBitFaceRender(pixelLocation.X, pixelLocation.Y);
+    if (pixelGroup == mainPixelGroup){
+        for (unsigned int i = 0; i < pixelCount; i++){
+            Vector2D pixelLocation = pixelGroup->GetCoordinate(i);
+            RGBColor color = *pixelGroup->GetColor(i);
+            
+            if((color.R + color.G + color.B) > (64 * 3)){
+                EnableBitFaceRender(pixelLocation.X, pixelLocation.Y);
+            }
         }
     }
 }

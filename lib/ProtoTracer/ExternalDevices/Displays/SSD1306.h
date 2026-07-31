@@ -21,6 +21,7 @@
 #include "../../Utils/Math/Mathematics.h" // Include for mathematical utilities.
 #include "../../Scene/Screenspace/Effect.h" // Include for effect interface.
 #include "../../Utils/Time/TimeStep.h" // Include for timestep utility.
+#include "../../Camera/CameraBase.h" // Include for setting main camera
 
 #ifdef SH1106
 #include "Adafruit_SH1106.h" // Include for SH1106 display (untested).
@@ -64,6 +65,7 @@ private:
     bool splashFinished = false; ///< True when the splash startup screen is finished
     Vector2D faceMin; ///< Minimum coordinate for face on display
     Vector2D faceMax; ///< Maximum coordinate for face on display
+    IPixelGroup* mainPixelGroup = nullptr; ///< The pixel group to use for rendering the face on the display
     uint32_t startMillis; ///< Start time of the display for the splash screen
 
 #ifdef SH1106
@@ -124,6 +126,13 @@ public:
      * @param faceMax Maximum coordinates for face rendering.
      */
     void SetFaceMax(Vector2D faceMax);
+
+    /**
+     * @brief Sets the main camera to use for rendering the face.
+     *
+     * @param mainCam The main camera to use for rendering the face.
+     */
+    void SetMainCam(CameraBase* mainCam);
 
     /**
      * @brief Initializes the display and related components.
