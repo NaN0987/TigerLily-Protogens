@@ -75,7 +75,7 @@ private:
 #endif
     static uint8_t faceBitmap[bufferSize]; ///< Background template for displaying the grids
 
-    static const uint8_t CoelaSplash[];
+    static const uint8_t TigerLilySplash[];
     static const uint8_t PrototracerSplash[];
     static const uint8_t FaceTemplate[];
 
