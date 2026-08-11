@@ -186,7 +186,7 @@ public:
     }
 
     void SelectFace(uint8_t code) {
-        if (IsBooped() && code != 6) {
+        if (IsBooped() && code < 6) {
             Surprised();
             return;
         }
