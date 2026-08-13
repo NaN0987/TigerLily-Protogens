@@ -51,8 +51,8 @@ private:
 
     const __FlashStringHelper* percentArray[10] = {F("10%"), F("20%"), F("30%"), F("40%"), F("50%"), F("60%"), F("70%"), F("80%"), F("90%"), F("100%")};//!< Battery percentages.
     const __FlashStringHelper* effectArray[10] = {F("NONE"), F("PHASEY"), F("PHASEX"), F("PHASER"), F("GLITCHX"), F("MAGNET"), F("FISHEYE"), F("BLURH"), F("BLURV"), F("BLURR")};
-    const __FlashStringHelper* colorArray[10] = {F("GRDIENT"), F("YELLOW"), F("ORANGE"), F("WHITE"), F("GREEN"), F("PURPLE"), F("RED"), F("BLUE"), F("RAINBOW"), F("NOISE")};
-    const __FlashStringHelper* onOffArray[2] = {F("OFFLINE"), F("ONLINE")};//!< Online/Offline statuses.
+    const __FlashStringHelper* colorArray[10] = {F("GRDIENT"), F("RED"), F("ORANGE"), F("YELLOW"), F("GREEN"), F("BLUE"), F("PURPLE"), F("WHITE"), F("RAINBOW"), F("NOISE")};
+    const __FlashStringHelper* onOffArray[2] = {F("OFF"), F("ON")};//!< Online/Offline statuses.
     const __FlashStringHelper* hueArray[10] = {F("0 DEG"), F("36 DEG"), F("72 DEG"), F("108 DEG"), F("144 DEG"), F("180 DEG"), F("216 DEG"), F("252 DEG"), F("288 DEG"), F("324 DEG")};//!< Hue options.
     const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")}; //!< Face names.
 
