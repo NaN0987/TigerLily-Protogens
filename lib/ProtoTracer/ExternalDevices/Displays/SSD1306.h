@@ -22,6 +22,8 @@
 #include "../../Scene/Screenspace/Effect.h" // Include for effect interface.
 #include "../../Utils/Time/TimeStep.h" // Include for timestep utility.
 #include "../../Camera/CameraBase.h" // Include for setting main camera
+#include "../Sensors/APDS9960.h" // Include for detecting boops
+#include "../Sensors/Microphone/MicrophoneFourier_MAX9814.h"
 
 #ifdef SH1106
 #include "Adafruit_SH1106.h" // Include for SH1106 display (untested).
@@ -56,6 +58,23 @@ private:
     const __FlashStringHelper* hueArray[10] = {F("0 DEG"), F("36 DEG"), F("72 DEG"), F("108 DEG"), F("144 DEG"), F("180 DEG"), F("216 DEG"), F("252 DEG"), F("288 DEG"), F("324 DEG")};//!< Hue options.
     const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")}; //!< Face names.
 
+    // Double array: Each index corresponds to the string array used by the options in that menu.
+    const __FlashStringHelper** optionsArray[13] = {
+        percentArray,
+        percentArray, // Brightness
+        percentArray, // SDE Brightness
+        onOffArray, // Mic
+        percentArray, // Mic Level
+        onOffArray, // Boop
+        onOffArray, // Spec
+        percentArray, // Size
+        colorArray, // Color
+        hueArray, // Hue F
+        hueArray, // Hue B
+        effectArray, // Effect
+        percentArray, // Fan Speed
+    }; 
+
     const __FlashStringHelper** faceNames; ///< Names of each face to be displayed on the screen
     bool useExternalFace = false; ///< To decide if it uses faceArray or faceNames for the face
 
@@ -67,6 +86,7 @@ private:
     Vector2D faceMax; ///< Maximum coordinate for face on display
     IPixelGroup* mainPixelGroup = nullptr; ///< The pixel group to use for rendering the face on the display
     uint32_t startMillis; ///< Start time of the display for the splash screen
+    bool wasBooped = false; ///< Variable to track if the boop was activated
 
 #ifdef SH1106
     static Adafruit_SH1106 display;
@@ -147,7 +167,7 @@ public:
     /**
      * @brief Updates the display content based on the current state.
      */
-    void Update();
+    void Update(bool isBooped);
 
     /**
      * @brief Sets the sub-effect to be applied to the display.
@@ -172,4 +192,23 @@ public:
      * @param str The string to print.
      */
     void CheckInvertPrintText(int16_t x, int16_t y, uint8_t menu, const String& str);
+
+    /**
+     * @brief Prints text that's centered along the horizontal axis.
+     *
+     * @param y Y-coordinate for the text.
+     * @param str The string to print.
+     * @param doInvert Whether to periodically invert the text and background color.
+     */
+    void PrintTextCentered(int16_t y, const String &str, bool doInvert);
+
+    /**
+     * @brief Inverts the pixel colors within a rectangular region.
+     *
+     * @param x X-coordinate for the top-left corner.
+     * @param y Y-coordinate for the top-left corner.
+     * @param w Width of the region.
+     * @param h Height of the region.
+     */
+    void InvertBox(int16_t x, int16_t y, int16_t w, int16_t h);
 };

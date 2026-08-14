@@ -98,7 +98,7 @@ void ProtogenProject::UpdateFace(float ratio) {
     }
 
     hud.SetEffect(Menu::GetEffect());// Pull Effect from menu and store reference in hud for observing data
-    hud.Update();
+    hud.Update(isBooped);
     this->scene.SetEffect(&hud);// Use HUD as effect for overlay/data extraction
 
     voiceDetection.SetThreshold(map(Menu::GetMicLevel(), 0, 10, 1000, 50));

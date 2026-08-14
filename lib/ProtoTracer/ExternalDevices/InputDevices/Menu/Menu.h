@@ -493,4 +493,11 @@ public:
      * @return A float representing the show menu ratio, scaled down by 100.
      */
     static float ShowMenu();
+
+    /**
+     * @brief Gets the name displayed on the matrices for a specific menu.
+     * @param index The index of the menu.
+     * @return The name without any leading or trailing spaces.
+     */
+    static String GetOptionName(uint8_t index);
 };

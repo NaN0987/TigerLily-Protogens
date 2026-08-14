@@ -494,3 +494,18 @@ uint8_t Menu::GetFanSpeed() {
 float Menu::ShowMenu() {
     return showMenuRatio / 100.0f;
 }
+
+String Menu::GetOptionName(uint8_t index) {
+    uint8_t str_index = index * 12;
+    String result = line1.substring(str_index, str_index + 12);
+
+    while(result.startsWith(" ")) {
+        result = result.substring(1);
+    }
+    while(result.endsWith(" ")) {
+        result = result.substring(0, str_index);
+        --str_index;
+    }
+    
+    return result;
+}
